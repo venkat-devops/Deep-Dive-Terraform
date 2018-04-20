@@ -6,11 +6,11 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 
 variable "aws_networking_bucket" {
-  default = "ddt-networking"
+  default = "ddt-networking-venkatp"
 }
 
 variable "aws_application_bucket" {
-  default = "ddt-application"
+  default = "ddt-application-venkatp"
 }
 
 variable "aws_dynamodb_table" {
@@ -24,7 +24,7 @@ variable "aws_dynamodb_table" {
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
-  region     = "us-west-2"
+  region     = "eu-west-2"
 }
 
 ##################################################################################
@@ -54,8 +54,8 @@ data "template_file" "networking_policy" {
   template = "${file("templates/user_policy.tpl")}"
 
   vars {
-    s3_rw_bucket          = "${var.aws_networking_bucket}"
-    s3_ro_bucket          = "${var.aws_application_bucket}"
+    s3_rw_bucket       = "${var.aws_networking_bucket}"
+    s3_ro_bucket       = "${var.aws_application_bucket}"
     dynamodb_table_arn = "${aws_dynamodb_table.terraform_statelock.arn}"
   }
 }
@@ -64,8 +64,8 @@ data "template_file" "application_policy" {
   template = "${file("templates/user_policy.tpl")}"
 
   vars {
-    s3_rw_bucket          = "${var.aws_application_bucket}"
-    s3_ro_bucket          = "${var.aws_networking_bucket}"
+    s3_rw_bucket       = "${var.aws_application_bucket}"
+    s3_ro_bucket       = "${var.aws_networking_bucket}"
     dynamodb_table_arn = "${aws_dynamodb_table.terraform_statelock.arn}"
   }
 }
@@ -159,7 +159,7 @@ resource "aws_iam_group_membership" "add-ec2admin" {
 
   users = [
     "${aws_iam_user.application.name}",
-    "${aws_iam_user.networking.name}"
+    "${aws_iam_user.networking.name}",
   ]
 
   group = "${aws_iam_group.ec2admin.name}"
@@ -169,7 +169,7 @@ resource "aws_iam_group_membership" "add-rdsadmin" {
   name = "add-rdsadmin"
 
   users = [
-    "${aws_iam_user.application.name}"
+    "${aws_iam_user.application.name}",
   ]
 
   group = "${aws_iam_group.rdsadmin.name}"
@@ -180,17 +180,17 @@ resource "aws_iam_group_membership" "add-rdsadmin" {
 ##################################################################################
 
 output "application_access_key" {
-    value = "${aws_iam_access_key.application.id}"
+  value = "${aws_iam_access_key.application.id}"
 }
 
 output "application_secret_key" {
-    value = "${aws_iam_access_key.application.secret}"
+  value = "${aws_iam_access_key.application.secret}"
 }
 
 output "networking_access_key" {
-    value = "${aws_iam_access_key.networking.id}"
+  value = "${aws_iam_access_key.networking.id}"
 }
 
 output "networking_secret_key" {
-    value = "${aws_iam_access_key.networking.secret}"
+  value = "${aws_iam_access_key.networking.secret}"
 }

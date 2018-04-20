@@ -1,7 +1,7 @@
 // Load the SDK for JavaScript
 var AWS = require('aws-sdk');
 // Set the region 
-AWS.config.update({region: 'us-west-2'});
+AWS.config.update({region: 'eu-west-2'});
 var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 exports.handler = (event, context, callback) => {

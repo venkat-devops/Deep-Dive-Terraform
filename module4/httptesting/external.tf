@@ -3,7 +3,7 @@ variable "projectcode" {
 }
 
 variable "url" {
-    default = "https://4rpwd825o5.execute-api.us-west-2.amazonaws.com/test/tdd_ddb_query"
+    default = "https://4rpwd825o5.execute-api.eu-west-2.amazonaws.com/test/tdd_ddb_query"
 }
 data "external" "example" {
     program = ["powershell.exe", "./getenvironment.ps1"]

@@ -20,7 +20,7 @@ Set-AWSCredential -SecretKey $values.aws_secret_key.Replace('"','') `
      -AccessKey $values.aws_access_key.Replace('"','')
 
 #Set the default region as applicable
-$region = "us-west-2"
+$region = "eu-west-2"
 Set-DefaultAWSRegion -Region $region
 
 #Get the VPC and AZs

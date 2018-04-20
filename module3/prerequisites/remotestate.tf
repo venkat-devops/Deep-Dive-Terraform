@@ -22,7 +22,7 @@ variable "user_home_path" {}
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
-  region     = "us-west-2"
+  region     = "eu-west-2"
 }
 
 ##################################################################################
