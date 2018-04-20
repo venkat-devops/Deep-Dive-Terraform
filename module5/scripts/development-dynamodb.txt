@@ -1,11 +1,11 @@
 {
-  "application_lead": "Sally Sue",
+  "application_lead": "Venkat Purushotham",
   "asg_instance_size": "t2.micro",
   "asg_max_size": "5",
   "asg_min_size": "2",
   "billing_code": "342647563",
   "environment": "development",
-  "network_lead": "Mary Moe",
+  "network_lead": "Jyothi Kovuru",
   "project_code": "8675309",
   "ProjectEnvironment": "development-8675309",
   "rds_db_name": "wordpress",
