@@ -21,7 +21,7 @@ resource "aws_launch_configuration" "webapp_lc" {
 
   name_prefix   = "${terraform.workspace}-ddt-lc-"
   image_id      = "${data.aws_ami.ubuntu.id}"
-  instance_type = "${data.external.configuration.result.asg_instance_size}"
+  instance_type = "t2.micro"
 
   security_groups = [
     "${aws_security_group.webapp_http_inbound_sg.id}",
@@ -65,8 +65,8 @@ resource "aws_autoscaling_group" "webapp_asg" {
 
   vpc_zone_identifier   = ["${data.terraform_remote_state.networking.public_subnets}"]
   name                  = "ddt_webapp_asg"
-  max_size              = "${data.external.configuration.result.asg_max_size}"
-  min_size              = "${data.external.configuration.result.asg_min_size}"
+  max_size              = "5"
+  min_size              = "2"
   wait_for_elb_capacity = false
   force_delete          = true
   launch_configuration  = "${aws_launch_configuration.webapp_lc.id}"
