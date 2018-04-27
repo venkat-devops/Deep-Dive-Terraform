@@ -4,7 +4,7 @@ variable "network_remote_state_key" {
 }
 
 variable "network_remote_state_bucket" {
-  default = "ddt-networking"
+  default = "ddt-networking-venkatp99-zz"
 }
 
 variable "aws_access_key" {}
@@ -25,7 +25,7 @@ variable "rds_username" {
 }
 
 variable "rds_password" {
-  default = "TerraformIsNumber1!"
+  default     = "TerraformIsNumber1!"
   description = "password, provide through your ENV variables"
 }
 
