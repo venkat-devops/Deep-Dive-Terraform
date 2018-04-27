@@ -12,7 +12,7 @@ variable "projectcode" {
 # variable "url" {}
 
 variable "application_lead" {
-  default = "Venkat Purushotham"
+  default = "Rupesh De"
 }
 
 variable "asg_instance_size" {
@@ -36,7 +36,7 @@ variable "environment" {
 }
 
 variable "network_lead" {
-  default = "Jyothi Kovuru"
+  default = "Himesh Roy"
 }
 
 variable "project_code" {
