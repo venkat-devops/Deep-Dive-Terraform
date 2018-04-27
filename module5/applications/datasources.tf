@@ -7,8 +7,8 @@ locals {
     # application_lead = "${data.external.configuration.result.application_lead}"
     environment = "development"
 
-    billing_code     = "1234567890"
-    project_code     = "111"
+    billing_code     = "342647563"
+    project_code     = "8675309"
     network_lead     = "Raman Roy"
     application_lead = "Vimal Sen"
   }

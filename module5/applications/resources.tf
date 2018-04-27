@@ -75,14 +75,13 @@ resource "aws_autoscaling_group" "webapp_asg" {
   tags = ["${
     list(
       map("key", "Name", "value", "ddt_webapp_asg", "propagate_at_launch", true),
-      map("key", "environment", "value", "${data.external.configuration.result.environment}", "propagate_at_launch", true),
-      map("key", "billing_code", "value", "${data.external.configuration.result.billing_code}", "propagate_at_launch", true),
-      map("key", "project_code", "value", "${data.external.configuration.result.project_code}", "propagate_at_launch", true),
-      map("key", "network_lead", "value", "${data.external.configuration.result.network_lead}", "propagate_at_launch", true),
-      map("key", "application_lead", "value", "${data.external.configuration.result.application_lead}", "propagate_at_launch", true)
+      map("key", "environment", "value", "development", "propagate_at_launch", true),
+      map("key", "billing_code", "value", "342647563", "propagate_at_launch", true),
+      map("key", "project_code", "value", "8675309", "propagate_at_launch", true),
+      map("key", "network_lead", "value", "Raman Roy", "propagate_at_launch", true),
+      map("key", "application_lead", "value", "Vimal Sen", "propagate_at_launch", true)
     )
   }"]
-
 }
 
 #
@@ -147,7 +146,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
 
 resource "aws_instance" "bastion" {
   ami                         = "${data.aws_ami.ubuntu.id}"
-  instance_type               = "${data.external.configuration.result.asg_instance_size}"
+  instance_type               = "t2.nano"
   subnet_id                   = "${element(data.terraform_remote_state.networking.public_subnets,0)}"
   associate_public_ip_address = true
   vpc_security_group_ids      = ["${aws_security_group.bastion_ssh_sg.id}"]
@@ -173,12 +172,12 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 
 resource "aws_db_instance" "rds" {
   identifier             = "${terraform.workspace}-ddt-rds"
-  allocated_storage      = "${data.external.configuration.result.rds_storage_size}"
-  engine                 = "${data.external.configuration.result.rds_engine}"
-  engine_version         = "${data.external.configuration.result.rds_version}"
-  instance_class         = "${data.external.configuration.result.rds_instance_size}"
-  multi_az               = "${data.external.configuration.result.rds_multi_az}"
-  name                   = "${terraform.workspace}${data.external.configuration.result.rds_db_name}"
+  allocated_storage      = "5"
+  engine                 = "mysql"
+  engine_version         = "5.6.37"
+  instance_class         = "db.t2.micro"
+  multi_az               = "false"
+  name                   = "wordpress"
   username               = "${var.rds_username}"
   password               = "${var.rds_password}"
   db_subnet_group_name   = "${aws_db_subnet_group.db_subnet_group.id}"
