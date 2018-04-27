@@ -6,7 +6,7 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 
 variable "aws_networking_bucket" {
-  default = "ddt-networking-venkatp"
+  default = "ddt-networking-venkatp99-zz"
 }
 
 variable "aws_application_bucket" {
