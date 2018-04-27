@@ -9,7 +9,7 @@ variable "projectcode" {
   default = "8675309"
 }
 
-variable "url" {}
+# variable "url" {}
 
 variable "application_lead" {
   default = "Venkat Purushotham"
